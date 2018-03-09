@@ -6,6 +6,7 @@ class ProductList {
             .then(products => {
                 this.products = products;
                 this.renderProducts(renderContainer, products);
+                this.renderCarusel('.carousel-inner', products);
                 this.addEventListeners();
             })
     }
@@ -35,6 +36,17 @@ class ProductList {
         });
         container.html(productListDomString);
     }
+    
+    renderCarusel(containerSelector, products){
+        const container = document.querySelector(containerSelector);
+        products.forEach(product =>{
+            container.innerHTML +=`<div class="carousel-item">
+                  <img class="d-block w-100" src="img/products/${product.image}" alt="Tesla X">
+                </div>`
+        })
+        
+    }
+    
     addEventListeners() {
         $('#productInfoModal').on('show.bs.modal', event => {
             const button = $(event.relatedTarget); // Button that triggered the modal
